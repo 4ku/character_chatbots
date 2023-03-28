@@ -9,10 +9,6 @@ model_args.max_history = 2
 model_args.max_length = 30
 model_args.num_candidates = 1
 model_args.reprocess_input_data = True
-model_args.num_train_epochs = 15
-model_args.overwrite_output_dir = True
-model_args.save_steps = -1
-
 
 MODELS_FOLDER = 'models'
 

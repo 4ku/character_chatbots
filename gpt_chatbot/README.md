@@ -15,7 +15,7 @@ pip install torch==1.13.1+cu116 torchvision==0.14.1+cu116 torchaudio==0.13.1 --e
 
 Install other requirements
 ```
-pip install -r requirements
+pip install -r requirements.txt
 ```
 ## Datasets
 ### Master Yoda corpus
@@ -30,7 +30,7 @@ You can train a conversational chatbot using either the GPT or GPT-2 model. Howe
 
 ```
 wget https://s3.amazonaws.com/models.huggingface.co/transfer-learning-chatbot/gpt_personachat_cache.tar.gz
-mkdir models/gpt_personachat_cache/ && tar -xzvf gpt_personachat_cache.tar.gz -C models/gpt_personachat_cache/
+mkdir -p models/gpt_personachat/ && tar -xzvf gpt_personachat_cache.tar.gz -C models/gpt_personachat/
 ```
 
 ### Pretrained GPT-2 on PERSONA-CHAT
@@ -41,6 +41,17 @@ sudo apt install -y git-lfs
 git lfs install
 cd models && git-lfs clone https://huggingface.co/4ku/gpt2-personachat
 ```
+
+### Pretrained GPT on PERSONA-CHAT and Master Yoda corpus
+You can probably have `OutOfMemoryError` because lack of GPU memory. So you can find a trained model in my Hugging Face repository.  
+ ```
+ git-lfs clone https://huggingface.co/4ku/gpt-persona-yoda
+ ```
+
+ ### Pretrained GPT-2 on PERSONA-CHAT and Master Yoda corpus
+```
+ git-lfs clone https://huggingface.co/4ku/gpt2-persona-yoda
+ ```
 
 ## Interact
 
