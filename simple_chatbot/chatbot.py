@@ -17,7 +17,8 @@ nltk.download('wordnet')  # first-time use only
 
 
 # Reading in the corpus
-with open('statements.txt', 'r', encoding='utf8', errors='ignore') as fin:
+DATA_PATH = "../dataset/yoda/personachat_yoda_statements.txt"
+with open(DATA_PATH, 'r', encoding='utf8', errors='ignore') as fin:
     raw = fin.read().lower()
 
 # TOkenisation
@@ -58,11 +59,11 @@ def response(user_response):
         return robo_response
 
 
-print("ROBO: Hi! My name is Robo.")
+print(">>> Hi!")
 while (True):
     user_response = input()
     user_response = user_response.lower()
     robo_response = response(user_response)
 
-    print("ROBO:", robo_response)
+    print(">>>", robo_response)
     sent_tokens.remove(user_response)

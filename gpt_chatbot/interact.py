@@ -1,5 +1,8 @@
 import os
-from dataset.yoda_personality import yoda_personality 
+import sys
+sys.path.append("..")
+from dataset.yoda.personality import yoda_personality 
+from dataset.sponge_bob.personality import sponge_bob_personality 
 from conv_ai import ConvAIModel, ConvAIArgs
 import sys
 
@@ -24,7 +27,7 @@ if args[1] not in ['gpt', 'gpt2']:
 
 model = ConvAIModel(
     args[1],
-    os.path.join(MODELS_FOLDER, "trained_models", args[1]),
+    os.path.join(MODELS_FOLDER, "gpt-persona-yoda"),
     use_cuda=True,
     args=model_args
 )
