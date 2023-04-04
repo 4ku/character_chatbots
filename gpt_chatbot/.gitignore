@@ -2,3 +2,4 @@ runs/
 outputs/
 cache_dir/
 env/
+gpt_personachat_cache.tar.gz

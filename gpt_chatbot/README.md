@@ -61,6 +61,17 @@ You can probably have `OutOfMemoryError` because lack of GPU memory. So you can 
  git-lfs clone https://huggingface.co/4ku/gpt2-persona-yoda
  ```
 
+### Sponge Bob models
+#### Pretrained GPT
+```
+git-lfs clone https://huggingface.co/4ku/gpt-persona-sponge_bob
+```
+
+#### Pretrained GPT2
+```
+git-lfs clone https://huggingface.co/4ku/gpt2-persona-sponge_bob
+```
+
 ## Interact
 Put the correct model path and choose right personality in `interact.py`. Than run:
 ```
