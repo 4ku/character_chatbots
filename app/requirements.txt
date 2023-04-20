@@ -1,0 +1,11 @@
+transformers==4.21.0
+pandas
+scikit-learn
+tensorboard
+chardet
+nltk
+uvicorn
+fastapi
+jinja2
+python-multipart
+
