@@ -5,7 +5,6 @@ from fastapi import FastAPI, Request, Form
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-# from model import ChatBot
 from html_utils import build_html_chat
 
 # GPT model imports
@@ -36,7 +35,6 @@ async def root(request: Request, message: Optional[str] = Form(None)):
 
         # gets a response of the AI bot
         _, history = model.interact_single(message, history, yoda_personality)
-        #_ = chatbot.get_reply(message)
 
         # converts the chat history into an HTML dialog
         chat_html = '\n'.join([
@@ -71,5 +69,4 @@ if __name__ == "__main__":
         args=model_args
     )
 
-    # chatbot = ChatBot()
     uvicorn.run(app, host="0.0.0.0", port=8000)

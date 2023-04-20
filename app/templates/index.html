@@ -14,32 +14,47 @@ https://www.flaticon.com/premium-icon/man_2202112?term=avatar&page=1&position=2&
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-        <link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}">
-    </head>
-    <body>
-        <br>
-        <div class="col-sm-4 col-sm-offset-4 frame">
-            <ul>
-                {{ chat|safe }}
-            </ul>
-            <div>
-                <form class="col-sm-12" name="frm1" method="post" action="/">
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="message" placeholder="Type a message">
-                        <span class="btn input-group-addon glyphicon glyphicon-share-alt" onclick="frm1.submit()"></span>
-                    </div>
-                </form>            
-            </div>
-        </div>   
-    </body>
-    <footer>
-        <a class="footer" href="https://www.flaticon.com/free-icons" title="icons">
-            Icons created by Freepik - Flaticon
-        </a>
-    </footer>
+
+<head>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet"
+        id="bootstrap-css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}">
+</head>
+
+<body>
+    <!-- Add proper styling and functionality-->
+    <label for="character">Choose a character:</label>
+    <select name="character" id="character">
+        <option value="Yoda">Yoda</option>
+        <option value="Sponge Bob">Sponge Bob</option>
+    </select>
+    <label for="model">Choose a model:</label>
+    <select name="model" id="character">
+        <option value="GPT">GPT</option>
+        <option value="GPT2">GPT2</option>
+        <option value="TF-IDF">TF-IDF</option>
+    </select>
+    <br>
+    <div class="col-sm-4 col-sm-offset-4 frame">
+        <ul>
+            {{ chat|safe }}
+        </ul>
+        <div>
+            <form class="col-sm-12" name="frm1" method="post" action="/">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="message" placeholder="Type a message">
+                    <span class="btn input-group-addon glyphicon glyphicon-share-alt" onclick="frm1.submit()"></span>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<footer>
+    <a class="footer" href="https://www.flaticon.com/free-icons" title="icons">
+        Icons created by Freepik - Flaticon
+    </a>
+</footer>
 <html>
