@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}">
+    <title>Document</title>
+</head>
+
+<body>
+    <form class="form__box" action="/" method="post">
+        <label for="character">Choose a character:</label>
+        <select name="character" id="character">
+            <option value="yoda">Yoda</option>
+            <option value="sponge_bob">Sponge Bob</option>
+        </select>
+        <br>
+        <label for="model">Choose a model:</label>
+        <select name="model" id="model">
+            <option value="gpt">GPT</option>
+            <option value="gpt2">GPT2</option>
+            <option value="TF-IDF">TF-IDF</option>
+        </select>
+        <br>
+        <button class="submit" type="submit">Start chat</button>
+    </form>
+
+</body>
+
+</html>
