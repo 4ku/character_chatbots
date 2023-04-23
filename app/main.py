@@ -101,4 +101,4 @@ async def root(request: Request, message: Optional[str] = Form(None)):
 # initialises the chatbot model and starts the uvicorn app
 if __name__ == "__main__":
 
-    uvicorn.run(app, host="0.0.0.0", port=8001)
+    uvicorn.run(app, host="0.0.0.0", port=8000)

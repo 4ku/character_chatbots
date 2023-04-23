@@ -68,6 +68,8 @@ under the MIT license
     height: 800px;
     overflow: hidden;
     padding: 0;
+    color: black !important;
+    font-size: 10px !important;
 }
 
 .frame>div:last-of-type {
