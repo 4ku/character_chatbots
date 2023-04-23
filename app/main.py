@@ -1,8 +1,8 @@
 # FastAPI imports
 import uvicorn
 from typing import Optional
-from fastapi import FastAPI, Request, Form
-from fastapi.responses import HTMLResponse
+from fastapi import FastAPI, Request, Form, HTTPException
+from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from html_utils import build_html_chat
@@ -13,11 +13,15 @@ from dataset.yoda.personality import yoda_personality
 from dataset.sponge_bob.personality import sponge_bob_personality
 
 MODELS_FOLDER = 'gpt_models/models'
+
+# This is a global vars
+# To allow correct behaviour for multiple
+# users we need to use Sessions
 history = []
+model_character = ''
+model_type = ''
 
 app = FastAPI()
-
-
 # mounts the static folder that contains the css file
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
@@ -26,20 +30,59 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
 
-@app.post("/", response_class=HTMLResponse)
-@app.get("/", response_class=HTMLResponse)
+# Combine this 2 functions
+@app.get("/")
+def index(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
+
+
+@app.post("/")
+async def process_form(request: Request, character: str = Form(...), model: str = Form(...)):
+    global model_character, model_type, history
+    history = []
+    model_character = character
+    model_type = model
+    return RedirectResponse("/chat")
+
+
+@app.post("/chat", response_class=HTMLResponse)
+@app.get("/chat", response_class=HTMLResponse)
 async def root(request: Request, message: Optional[str] = Form(None)):
-    global history
+    global model_character, model_type, history
+
+    if model_character is None or model_type is None:
+        raise HTTPException(status_code=404, detail="Form data not found")
+
+    model_personality = ''
+    if model_character == 'yoda':
+        model_personality = yoda_personality
+    elif model_character == 'sponge_bob':
+        model_personality = sponge_bob_personality
+
+    if model_type != 'TF-IDF':
+        model_args = ConvAIArgs()
+        model_args.max_history = 2
+        model_args.max_length = 30
+        model_args.num_candidates = 1
+        model_args.reprocess_input_data = True
+
+        model = ConvAIModel(
+            model_type=f'{model_type}',
+            model_name=f'{MODELS_FOLDER}/{model_type}-persona-{model_character}',
+            use_cuda=True,
+            args=model_args
+        )
+
     # if the Form is not None, then get a reply from the bot
     if message is not None:
 
         # gets a response of the AI bot
-        _, history = model.interact_single(message, history, yoda_personality)
+        _, history = model.interact_single(message, history, model_personality)
 
         # converts the chat history into an HTML dialog
         chat_html = '\n'.join([
             build_html_chat(is_me=i %
-                            2 == 0, text=msg)
+                            2 == 0, character=model_character, text=msg)
             for i, msg in enumerate(history)
         ])
 
@@ -48,25 +91,14 @@ async def root(request: Request, message: Optional[str] = Form(None)):
 
     message_dict = {
         "request": request,
-        "chat": chat_html
+        "chat": chat_html,
+        "model": model_type
     }
 
     # returns the final HTML
-    return templates.TemplateResponse("index.html", message_dict)
+    return templates.TemplateResponse("chat.html", message_dict)
 
 # initialises the chatbot model and starts the uvicorn app
 if __name__ == "__main__":
-    model_args = ConvAIArgs()
-    model_args.max_history = 2
-    model_args.max_length = 30
-    model_args.num_candidates = 1
-    model_args.reprocess_input_data = True
 
-    model = ConvAIModel(
-        model_type='gpt2',
-        model_name=f'{MODELS_FOLDER}/gpt2-persona-yoda',
-        use_cuda=True,
-        args=model_args
-    )
-
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8001)

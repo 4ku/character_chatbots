@@ -65,7 +65,7 @@ under the MIT license
 
 .frame {
     background: #e0e0de;
-    height: 900px;
+    height: 800px;
     overflow: hidden;
     padding: 0;
 }
@@ -88,6 +88,14 @@ body>div>div>div.msj-rta.macro {
     margin: auto;
     margin-left: 1%;
 }
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 10%;
+}
+
 
 ul {
     width: 100%;
@@ -157,4 +165,52 @@ input:focus {
     background-color: white;
     color: gray;
     text-align: center;
+}
+
+.form__box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    padding: 40px;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+}
+
+.form__box h2 {
+    margin: 0 0 30px;
+    padding: 0;
+    text-align: center;
+}
+
+.form__box select {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    border: none;
+    border-radius: 1px solid;
+    outline: none;
+    background: transparent;
+}
+
+.form__box label {
+    position: relative;
+    font-size: 20px;
+    pointer-events: none;
+    margin-left: 10px;
+
+}
+
+.submit {
+    margin-left: 100px;
+    margin-top: 10px;
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    overflow: hidden;
 }
