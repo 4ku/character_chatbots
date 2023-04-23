@@ -7,19 +7,15 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from html_utils import build_html_chat
 
-# GPT model imports
-from gpt_models.conv_ai import ConvAIArgs, ConvAIModel
-from dataset.yoda.personality import yoda_personality
-from dataset.sponge_bob.personality import sponge_bob_personality
 
-MODELS_FOLDER = 'gpt_models/models'
+from models import ConvGPTModel
+from enums import ModelType, Character
 
 # This is a global vars
 # To allow correct behaviour for multiple
 # users we need to use Sessions
 history = []
-model_character = ''
-model_type = ''
+conv_model = None
 
 app = FastAPI()
 # mounts the static folder that contains the css file
@@ -38,51 +34,32 @@ def index(request: Request):
 
 @app.post("/")
 async def process_form(request: Request, character: str = Form(...), model: str = Form(...)):
-    global model_character, model_type, history
+    global conv_model, history
     history = []
-    model_character = character
-    model_type = model
+
+    conv_model = ConvGPTModel(ModelType(model), Character(character))
     return RedirectResponse("/chat")
 
 
 @app.post("/chat", response_class=HTMLResponse)
 @app.get("/chat", response_class=HTMLResponse)
 async def root(request: Request, message: Optional[str] = Form(None)):
-    global model_character, model_type, history
 
-    if model_character is None or model_type is None:
+    if conv_model is None:
         raise HTTPException(status_code=404, detail="Form data not found")
-
-    model_personality = ''
-    if model_character == 'yoda':
-        model_personality = yoda_personality
-    elif model_character == 'sponge_bob':
-        model_personality = sponge_bob_personality
-
-    if model_type != 'TF-IDF':
-        model_args = ConvAIArgs()
-        model_args.max_history = 2
-        model_args.max_length = 30
-        model_args.num_candidates = 1
-        model_args.reprocess_input_data = True
-
-        model = ConvAIModel(
-            model_type=f'{model_type}',
-            model_name=f'{MODELS_FOLDER}/{model_type}-persona-{model_character}',
-            use_cuda=True,
-            args=model_args
-        )
 
     # if the Form is not None, then get a reply from the bot
     if message is not None:
-
+        
+        history.append(message)
         # gets a response of the AI bot
-        _, history = model.interact_single(message, history, model_personality)
+        response = conv_model.interact_single(message)
+        history.append(response)
 
         # converts the chat history into an HTML dialog
         chat_html = '\n'.join([
             build_html_chat(is_me=i %
-                            2 == 0, character=model_character, text=msg)
+                            2 == 0, character=conv_model.character.value, text=msg)
             for i, msg in enumerate(history)
         ])
 
@@ -92,7 +69,7 @@ async def root(request: Request, message: Optional[str] = Form(None)):
     message_dict = {
         "request": request,
         "chat": chat_html,
-        "model": model_type
+        "model": conv_model.model_type.value
     }
 
     # returns the final HTML
