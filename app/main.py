@@ -8,7 +8,7 @@ from fastapi.templating import Jinja2Templates
 from html_utils import build_html_chat
 
 
-from models import ConvGPTModel
+from models import ConvGPTModel, SimpleConvModel
 from enums import ModelType, Character
 
 # This is a global vars
@@ -36,8 +36,10 @@ def index(request: Request):
 async def process_form(request: Request, character: str = Form(...), model: str = Form(...)):
     global conv_model, history
     history = []
-
-    conv_model = ConvGPTModel(ModelType(model), Character(character))
+    if ModelType.SIMPLE == ModelType(model):
+        conv_model = SimpleConvModel(ModelType(model), Character(character))
+    else:
+        conv_model = ConvGPTModel(ModelType(model), Character(character))
     return RedirectResponse("/chat")
 
 
