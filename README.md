@@ -38,10 +38,8 @@ Code was inspired by "[Develop a Conversational Bot in 4 simple steps](https://
 1. In the first page you can select model and character. After pressing ```Start chat``` you will be redirected to the chat page.
 2. In this page you can chat with selected character about everything. Below you can see example of chats.
 
-{:style="text-align:center;"}
 ![Chat with Sponge Yoda](app/images/Yoda_screenshot.png "Chat with Yoda")
 
-{:style="text-align:center;"}
 ![Chat with Sponge Bob](app/images/Sponge_Bob_screenshot.png "Chat with Sponge Bob")
 
 3. In chat page the is also a ```Go back``` button. After pressing it you will return to the first page.
