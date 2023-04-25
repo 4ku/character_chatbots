@@ -20,19 +20,9 @@ Code was inspired by "[Develop a Conversational Bot in 4 simple steps](https://
 #### **How to run?**
 1. Clone the repository to your local machine.
 2. ```pip install -r requirements.txt```.
-3. ```cd app/models/gpt/models```
-4. Download pretrained models from Ivan's Hugginface repository:
-
-    ```git-lfs clone https://huggingface.co/4ku/gpt-persona-yoda  ```
-
-    ```git-lfs clone https://huggingface.co/4ku/gpt2-persona-yoda```
-
-    ```git-lfs clone https://huggingface.co/4ku/gpt-persona-sponge_bob```
-
-    ```git-lfs clone https://huggingface.co/4ku/gpt2-persona-sponge_bob```
-
-5. ```cd ../../../app```
-6. ```python3 main.py```
+3. Setup each model as described in the corresponding README.md file in ```app/gpt_models/```, ```app/pytorch_models/``` and ```app/simple_TFIDF_models/```.
+4. ```cd ../../../app```
+5. ```python3 main.py```
 
 #### **User guide**
 1. In the first page you can select model and character. After pressing ```Start chat``` you will be redirected to the chat page.

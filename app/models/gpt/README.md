@@ -2,6 +2,18 @@
 
 The model code was adopted from the [simpletransformers repository](https://github.com/ThilinaRajapakse/simpletransformers), which is derived from the [State-of-the-Art Conversational AI with Transfer Learning repository](https://github.com/huggingface/transfer-learning-conv-ai), and subsequently a little refined.
 
+## Setup environment
+
+Install appropriate PyTorch version
+```
+pip install torch==1.13.1+cu116 torchvision==0.14.1+cu116 torchaudio==0.13.1 --extra-index-url https://download.pytorch.org/whl/cu116
+```
+
+Install other requirements
+```
+pip install -r requirements.txt
+```
+
 ## Datasets
 ### Master Yoda corpus
 
@@ -26,7 +38,7 @@ mkdir -p models/gpt_personachat/ && tar -xzvf gpt_personachat_cache.tar.gz -C mo
 ```
 
 #### Pretrained GPT-2 on PERSONA-CHAT
-A pretrained GPT-2 model was found in [gutenberg-dialog repository](https://github.com/ricsinaruto/gutenberg-dialog) and uploaded it to [Ivan's Hugging Face repository](https://huggingface.co/4ku/gpt2-personachat).
+A pretrained GPT-2 model was found in [gutenberg-dialog repository](https://github.com/ricsinaruto/gutenberg-dialog) and uploaded it to [Hugging Face repository](https://huggingface.co/4ku/gpt2-personachat).
 
 ```
 sudo apt install -y git-lfs
@@ -34,3 +46,25 @@ git lfs install
 cd models && git-lfs clone https://huggingface.co/4ku/gpt2-personachat
 ```
 
+### Master Yoda models
+#### Pretrained GPT on PERSONA-CHAT and Master Yoda corpus
+You can probably have `OutOfMemoryError` because lack of GPU memory. So you can find a trained model in my Hugging Face repository.  
+ ```
+ git-lfs clone https://huggingface.co/4ku/gpt-persona-yoda
+ ```
+
+ #### Pretrained GPT-2 on PERSONA-CHAT and Master Yoda corpus
+```
+ git-lfs clone https://huggingface.co/4ku/gpt2-persona-yoda
+ ```
+
+### Sponge Bob models
+#### Pretrained GPT
+```
+git-lfs clone https://huggingface.co/4ku/gpt-persona-sponge_bob
+```
+
+#### Pretrained GPT2
+```
+git-lfs clone https://huggingface.co/4ku/gpt2-persona-sponge_bob
+```
