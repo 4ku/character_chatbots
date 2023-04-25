@@ -1,12 +1,11 @@
 # Simple chatbot using TF_IDF approach
 The model code was taken from the [this repository](https://github.com/parulnith/Building-a-Simple-Chatbot-in-Python-using-NLTK) and modified.
 
-
 ## Setup environment
 
 Install requirements
 ```
-pip install -r requirements
+pip install -r requirements.txt
 ```
 
 ## Chatbot data
@@ -17,8 +16,3 @@ All Master Yoda utterances parsed from [this source](https://www.kaggle.com/data
 
 ### Sponge Bob
 All Sponge Bob utterances parsed from [this source](https://www.kaggle.com/datasets/mikhailgaerlan/spongebob-squarepants-completed-transcripts) is stored in `dataset/sponge_bob/sponge_bob_statements.txt`. Also here is merged data with PERSONA-CHAT dataset (`personachat_train_statements.txt` file) stored in `dataset/sponge_bob/personachat_sponge_bob_statements.txt`.
-
-## Interact
-```
-python chatbot.py
-```
