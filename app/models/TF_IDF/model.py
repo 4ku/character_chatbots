@@ -67,7 +67,7 @@ class SimpleConvModel:
         flat.sort()
         req_tfidf = flat[-2]
         self.sent_tokens.remove(message)
-        if (req_tfidf == 0):
+        if req_tfidf == 0:
             chatbot_response = chatbot_response+"I am sorry! I don't understand you"
             return chatbot_response
         else:
@@ -75,8 +75,7 @@ class SimpleConvModel:
             return chatbot_response
 
     def interact(self):
-        print(">>> Hi!")
-        while (True):
+        while True:
             user_response = input()
             user_response = user_response.lower()
             chatbot_response = self.interact_single(user_response)

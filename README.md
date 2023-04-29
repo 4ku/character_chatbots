@@ -18,11 +18,33 @@ Code was inspired by "[Develop a Conversational Bot in 4 simple steps](https://
 * `requirements.txt`: File that contains all dependencies to install.
 
 #### **How to run?**
-1. Clone the repository to your local machine.
-2. ```pip install -r requirements.txt```.
-3. Setup each model as described in the corresponding README.md file in ```app/gpt_models/```, ```app/pytorch_models/``` and ```app/simple_TFIDF_models/```.
-4. ```cd ../../../app```
-5. ```python3 main.py```
+## 1. Clone the repository to your local machine.
+### 1a. Create a virtual environment  if needed
+
+## 2. Install Base Dependencies
+  ``` 
+    make install
+   ```
+## 3. Set up Model Specific Dependencies
+### 3 a. Set up GPT-Models
+``` 
+    make gpt-models
+ ```
+
+### 3 b. Set up Pytorch-Models
+``` 
+    make pytorch-models
+ ```
+
+### 3 b. Set up TFIDF-Models
+``` 
+    make tfidf-models
+ ```
+
+## 4. Run Project
+```
+make run
+```
 
 #### **User guide**
 1. In the first page you can select model and character. After pressing ```Start chat``` you will be redirected to the chat page.
