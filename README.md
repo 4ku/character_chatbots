@@ -12,9 +12,9 @@ Code was inspired by "[Develop a Conversational Bot in 4 simple steps](https://
 * `app/static/`: Contains the icons and CSS files
 * `app/templates/`: Contains the `index.html` template file that will be modified at run time with the dialog HTML using jinja
 * `app/dataset/`: Data used for training Yoda and Sponge Bob personalities
-* `app/gpt_models/`: Contains all files for inferencing and fine-tuning small GPT ang GPT-2 models.
-* `app/pytorch_models/`: Contains all files for inferencing and fine-tuning Pytorch RNN models.
-* `app/simple_TFIDF_models/`: Contains all files for inferencing simple statistical model.
+* `app/models/gpt`: Contains all files for inferencing and fine-tuning small GPT ang GPT-2 models.
+* `app/models/rnn`: Contains all files for inferencing and fine-tuning Pytorch RNN model.
+* `app/models/TF_IDF`: Contains all files for inferencing simple statistical model.
 * `requirements.txt`: File that contains all dependencies to install.
 
 #### **How to run?**
@@ -36,7 +36,7 @@ Code was inspired by "[Develop a Conversational Bot in 4 simple steps](https://
     make pytorch-models
  ```
 
-### 3 b. Set up TFIDF-Models
+### 3 c. Set up TFIDF-Models
 ``` 
     make tfidf-models
  ```
