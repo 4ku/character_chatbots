@@ -12,17 +12,39 @@ Code was inspired by "[Develop a Conversational Bot in 4 simple steps](https://
 * `app/static/`: Contains the icons and CSS files
 * `app/templates/`: Contains the `index.html` template file that will be modified at run time with the dialog HTML using jinja
 * `app/dataset/`: Data used for training Yoda and Sponge Bob personalities
-* `app/gpt_models/`: Contains all files for inferencing and fine-tuning small GPT ang GPT-2 models.
-* `app/pytorch_models/`: Contains all files for inferencing and fine-tuning Pytorch RNN models.
-* `app/simple_TFIDF_models/`: Contains all files for inferencing simple statistical model.
+* `app/models/gpt`: Contains all files for inferencing and fine-tuning small GPT ang GPT-2 models.
+* `app/models/rnn`: Contains all files for inferencing and fine-tuning Pytorch RNN model.
+* `app/models/TF_IDF`: Contains all files for inferencing simple statistical model.
 * `requirements.txt`: File that contains all dependencies to install.
 
 #### **How to run?**
-1. Clone the repository to your local machine.
-2. ```pip install -r requirements.txt```.
-3. Setup each model as described in the corresponding README.md file in ```app/gpt_models/```, ```app/pytorch_models/``` and ```app/simple_TFIDF_models/```.
-4. ```cd ../../../app```
-5. ```python3 main.py```
+## 1. Clone the repository to your local machine.
+### 1a. Create a virtual environment  if needed
+
+## 2. Install Base Dependencies
+  ``` 
+    make install
+   ```
+## 3. Set up Model Specific Dependencies
+### 3 a. Set up GPT-Models
+``` 
+    make gpt-models
+ ```
+
+### 3 b. Set up Pytorch-Models
+``` 
+    make pytorch-models
+ ```
+
+### 3 c. Set up TFIDF-Models
+``` 
+    make tfidf-models
+ ```
+
+## 4. Run Project
+```
+make run
+```
 
 #### **User guide**
 1. In the first page you can select model and character. After pressing ```Start chat``` you will be redirected to the chat page.

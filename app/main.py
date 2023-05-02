@@ -5,10 +5,11 @@ from fastapi import FastAPI, Request, Form, HTTPException
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+
 from html_utils import build_html_chat
 
 
-from models import ConvGPTModel, SimpleConvModel
+from models import ConvGPTModel, SimpleConvModel, SimpleRNN
 from enums import ModelType, Character
 
 # This is a global vars
@@ -36,10 +37,14 @@ def index(request: Request):
 async def process_form(request: Request, character: str = Form(...), model: str = Form(...)):
     global conv_model, history
     history = []
-    if ModelType.SIMPLE == ModelType(model):
-        conv_model = SimpleConvModel(ModelType(model), Character(character))
-    else:
-        conv_model = ConvGPTModel(ModelType(model), Character(character))
+    match ModelType(model):
+        case ModelType.SIMPLE:
+            conv_model = SimpleConvModel(ModelType(model), Character(character))
+        case ModelType.RNN:
+            conv_model = SimpleRNN(ModelType(model), Character(character))
+        case _:
+            conv_model = ConvGPTModel(ModelType(model), Character(character))
+
     return RedirectResponse("/chat")
 
 
