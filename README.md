@@ -21,6 +21,8 @@ Code was inspired by "[Develop a Conversational Bot in 4 simple steps](https://
 ## 1. Clone the repository to your local machine.
 ### 1a. Create a virtual environment  if needed
 
+Your environment should have Python 3.10 or newer as a main Python version.
+
 ## 2. Install Base Dependencies
   ``` 
     make install
@@ -33,7 +35,7 @@ Code was inspired by "[Develop a Conversational Bot in 4 simple steps](https://
 
 ### 3 b. Set up Pytorch-Models
 ``` 
-    make pytorch-models
+    make rnn-models
  ```
 
 ### 3 c. Set up TFIDF-Models
